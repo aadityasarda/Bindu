@@ -26,7 +26,7 @@ config = {
     "name": "beginner_zero_config_agent",
     "description": "Zero-config local Bindu agent for first-time users",
     "deployment": {
-        "url": "http://localhost:3773",
+        "url": "http://localhost:3774",
         "expose": True,
     },
     "skills": [],
