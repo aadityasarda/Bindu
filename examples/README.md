@@ -1,8 +1,8 @@
-# Bindu Examples 🌻
+# Bindu Examples 
 
 Welcome to the Bindu examples collection! This directory contains ready-to-run agents that demonstrate various capabilities of the Bindu framework, from simple echo bots to advanced payment-gated advisors.
 
-## 🚀 Quick Start
+## Quick Start
 
 Ensure you have the dependencies installed:
 
@@ -16,7 +16,7 @@ Run any example using `uv run`:
 uv run examples/<example_name>.py
 ```
 
-## 📂 Available Examples
+## Available Examples
 
 ### 1. Basic Agents
 These examples demonstrate the fundamental concepts of Bindu.
@@ -42,7 +42,7 @@ Examples showcasing unique Bindu features like payments and webhooks.
 | `premium_advisor.py` | **[NEW]** A "Gatekeeper" agent that requires crypto payment. | **X402 Payments**, Middleware |
 | `echo_agent_with_webhooks.py` | Demonstrates asynchronous event notification. | Webhooks, A2A Communication |
 
-## 💎 Spotlight: Premium Advisor Agent
+## Spotlight: Premium Advisor Agent
 
 The `premium_advisor.py` example demonstrates Bindu's unique **X402** payment protocol. This agent is configured to reject any interaction unless a micropayment is made.
 
@@ -59,7 +59,7 @@ uv run examples/premium_advisor.py
 
 This powerful feature allows you to monetize your agents natively!
 
-## 🧪 Testing Your Agents
+## Testing Your Agents
 
 You can interact with your agents using `curl` or any HTTP client.
 
