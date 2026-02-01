@@ -1,21 +1,54 @@
 from agno.agent import Agent
-from agno.models.openai import OpenAIChat
+from agno.models.google import Gemini
+from agno.models.groq import Groq
+import os
 
 
 def build_reflection_agent():
     return Agent(
-        instructions="""
-You are a reflection and quality evaluation agent.
+        name="Reflection Agent",
+        # model=Gemini(
+        #     id="gemini-2.5-flash",
+        #     api_key=os.getenv("GOOGLE_API_KEY"),
+        #     temperature=0
+        # ),
+        model=Groq(
+            id="llama-3.3-70b-versatile",
+            api_key=os.getenv("GROQ_API_KEY"),
+            temperature=0.1
+        ),
+        description="""You are a strict JSON-only quality evaluation agent.
 
-Analyze the response and return JSON:
+CRITICAL RULES:
+1. Output ONLY valid JSON - no markdown, no explanations, no text
+2. Do NOT wrap JSON in ```json``` code blocks
+3. Do NOT add any commentary or explanations
 
-{
-  "quality": "good" or "bad",
-  "issues": ["..."],
-  "fix_strategy": "..."
-}
+Your EXACT output format:
+{"quality":"good","issues":[],"fix_strategy":""}
 
-Be strict. Ensure factual correctness, clarity, structure, and depth.
-""",
-        model=OpenAIChat(id="gpt-4o-mini"),
+OR
+
+{"quality":"bad","issues":["issue 1","issue 2"],"fix_strategy":"specific improvement strategy"}
+
+Quality Evaluation Criteria:
+- "good": Response is accurate, complete, well-structured, and directly answers the question
+- "bad": Response has factual errors, missing information, poor structure, or doesn't answer the question
+
+For "good" responses:
+- Set issues to empty array []
+- Set fix_strategy to empty string ""
+
+For "bad" responses:
+- List specific issues found
+- Provide concrete fix_strategy (e.g., "Add more examples and define technical terms")
+
+Example Input: "Machine Learning is about computers learning stuff."
+Example Output: {"quality":"bad","issues":["Too vague","Missing key concepts","No structure"],"fix_strategy":"Provide proper definition, explain types of ML, add real-world applications"}
+
+Example Input: "Machine Learning is a subset of AI that uses algorithms to learn from data..."
+Example Output: {"quality":"good","issues":[],"fix_strategy":""}
+
+Remember: ONLY output the JSON object, nothing else.""",
+  
     )

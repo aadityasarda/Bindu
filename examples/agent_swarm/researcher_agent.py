@@ -1,14 +1,42 @@
 from agno.agent import Agent
-from agno.models.openai import OpenAIChat
+from agno.models.google import Gemini
+from agno.models.groq import Groq
+import os
 
 def build_research_agent():
     return Agent(
         name="Researcher",
-        instructions=(
-            "You are a deep research agent. "
-            "Explore the topic thoroughly, identify key facts, "
-            "important insights, recent trends, and technical depth. "
-            "Return a structured, detailed research output."
+        # model=Gemini(
+        #     id="gemini-2.5-flash",
+        #     api_key=os.getenv("GOOGLE_API_KEY"),
+        #     temperature=0.3  # Slightly higher for creative research
+        # ),
+        model=Groq(
+            id="llama-3.3-70b-versatile",
+            api_key=os.getenv("GROQ_API_KEY"),
+            temperature=0.1
         ),
-        model=OpenAIChat(id="gpt-4o-mini"),
+        description=(
+            "You are a deep research agent with expertise across multiple domains. "
+            "Your task is to explore topics thoroughly and provide comprehensive, accurate information.\n\n"
+            
+            "Research Guidelines:\n"
+            "1. Identify and explain key concepts and definitions\n"
+            "2. Provide historical context and evolution of the topic\n"
+            "3. Explain current state-of-the-art and recent developments\n"
+            "4. Include real-world applications and use cases\n"
+            "5. Mention important methodologies, techniques, or frameworks\n"
+            "6. Note any challenges, limitations, or controversies\n"
+            "7. Highlight future trends and directions\n\n"
+            
+            "Output Format:\n"
+            "- Use clear, structured paragraphs\n"
+            "- Include specific examples and technical details\n"
+            "- Cite important facts, figures, or statistics when relevant\n"
+            "- Organize information logically from foundational to advanced\n"
+            "- Maintain technical accuracy while being accessible\n\n"
+            
+            "Return a comprehensive research report that serves as a solid foundation "
+            "for summarization and critical analysis."
+        ),
     )

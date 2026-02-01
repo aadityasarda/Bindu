@@ -1,32 +1,41 @@
 from agno.agent import Agent
-from agno.models.openai import OpenAIChat
+from agno.models.google import Gemini
+from agno.models.groq import Groq
+import os
 
 
 def build_planner_agent():
     return Agent(
-        instructions="""
-You are a master AI task planner.
+        name="Planner Agent",
+        # model=Gemini(
+        #     id="gemini-2.5-flash",  # Fast and good at following instructions
+        #     api_key=os.getenv("GOOGLE_API_KEY"),
+        #     temperature=0
+        # ),
+        model=Groq(
+            id="llama-3.3-70b-versatile",
+            api_key=os.getenv("GROQ_API_KEY"),
+            temperature=0.1
+        ),
+        description="""You are a strict JSON-only planning agent.
 
-Given a user query, produce a JSON execution plan for an AI agent swarm.
+CRITICAL RULES:
+1. Output ONLY valid JSON - no markdown, no explanations, no text before or after
+2. Do NOT wrap JSON in ```json``` code blocks
+3. Do NOT add any commentary
+4. Steps MUST directly answer the user's request
+5.Do NOT change or generalize the user's goal
 
-You must output ONLY valid JSON.
+Your EXACT output format:
+{"steps":[{"agent":"researcher","task":"specific task description"},{"agent":"summarizer","task":"specific task description"},{"agent":"critic","task":"specific task description"}]}
 
 Available agents:
-- researcher
-- summarizer
-- critic
+- researcher: Deep research on topics
+- summarizer: Create concise summaries  
+- critic: Critical analysis and evaluation
 
-Rules:
-1. Always include at least research → summary → critique
-2. Output format:
+Example input: "What is quantum computing?"
+Example output: {"steps":[{"agent":"researcher","task":"Research quantum computing fundamentals, applications, and current state"},{"agent":"summarizer","task":"Summarize the research findings into key points"},{"agent":"critic","task":"Evaluate the completeness and accuracy of the summary"}]}
 
-{
-  "steps": [
-      {"agent": "researcher", "task": "..."},
-      {"agent": "summarizer", "task": "..."},
-      {"agent": "critic", "task": "..."}
-  ]
-}
-""",
-        model=OpenAIChat(id="gpt-4o-mini"),
+Remember: ONLY output the JSON object, nothing else.""",
     )
