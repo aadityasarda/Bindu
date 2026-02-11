@@ -390,75 +390,19 @@ Output:
 
 ---
 
-## 🔐 Authentication
+## � Core Features
 
-Secure API access with **Ory Hydra OAuth2**. Authentication is **optional** - perfect for development without auth.
-
-📖 **[Full Guide →](docs/AUTHENTICATION.md)**
-
----
-
-## 💰 Payment Integration (X402)
-
-Monetize your AI agents with **X402 payment protocol** - accept USDC payments on Base blockchain before executing protected methods.
-
-📖 **[Full Guide →](docs/PAYMENT.md)**
-
----
-
-## 💾 PostgreSQL Storage
-
-Persistent storage for production deployments. **Optional** - InMemoryStorage used by default.
-
-📖 **[Full Guide →](docs/STORAGE.md)**
-
----
-
-## 📋 Redis Scheduler
-
-Distributed task scheduling for multi-worker deployments. **Optional** - InMemoryScheduler used by default.
-
-📖 **[Full Guide →](docs/SCHEDULER.md)**
-
----
-
-## 🎯 Skills System
-
-Reusable capabilities that agents advertise and execute. Enable intelligent task routing and orchestration.
-
-📖 **[Full Guide →](docs/SKILLS.md)**
-
----
-
-## 🤝 Agent Negotiation
-
-Capability-based agent selection for intelligent orchestration. Query multiple agents and select the best one.
-
-📖 **[Full Guide →](docs/NEGOTIATION.md)**
-
----
-
-## 📬 Push Notifications
-
-Real-time webhook notifications for task updates. No polling required - get instant updates via webhooks.
-
-📖 **[Full Guide →](docs/NOTIFICATIONS.md)**
-
----
-
-## 📊 Observability & Monitoring
-
-Track performance, debug issues, and monitor your agents with **OpenTelemetry** and **Sentry**.
-
-📖 **[Full Guide →](docs/OBSERVABILITY.md)**
-
----
-
-## 🔄 Retry Mechanism
-
-Automatic retry with exponential backoff for resilient agents. Handles transient failures gracefully.
-
-📖 **[Full Guide →](https://docs.getbindu.com/bindu/learn/retry/overview)**
+| Feature | Description | Documentation |
+|---------|-------------|---------------|
+| �🔐 **Authentication** | Secure API access with Ory Hydra OAuth2 (optional for development) | [Guide →](docs/AUTHENTICATION.md) |
+| 💰 **Payment Integration (X402)** | Accept USDC payments on Base blockchain before executing protected methods | [Guide →](docs/PAYMENT.md) |
+| 💾 **PostgreSQL Storage** | Persistent storage for production deployments (optional - InMemoryStorage by default) | [Guide →](docs/STORAGE.md) |
+| 📋 **Redis Scheduler** | Distributed task scheduling for multi-worker deployments (optional - InMemoryScheduler by default) | [Guide →](docs/SCHEDULER.md) |
+| 🎯 **Skills System** | Reusable capabilities that agents advertise and execute for intelligent task routing | [Guide →](docs/SKILLS.md) |
+| 🤝 **Agent Negotiation** | Capability-based agent selection for intelligent orchestration | [Guide →](docs/NEGOTIATION.md) |
+| 📬 **Push Notifications** | Real-time webhook notifications for task updates - no polling required | [Guide →](docs/NOTIFICATIONS.md) |
+| 📊 **Observability & Monitoring** | Track performance and debug issues with OpenTelemetry and Sentry | [Guide →](docs/OBSERVABILITY.md) |
+| 🔄 **Retry Mechanism** | Automatic retry with exponential backoff for resilient agents | [Guide →](https://docs.getbindu.com/bindu/learn/retry/overview) |
 
 ---
 
