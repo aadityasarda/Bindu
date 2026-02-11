@@ -2,6 +2,45 @@
 
 Bindu integrates with **OpenTelemetry (OTEL)** and **Sentry** to provide comprehensive observability and error tracking for your agents. Monitor performance, trace execution flows, and debug issues using industry-standard platforms.
 
+## Architecture
+
+```mermaid
+sequenceDiagram
+    participant Agent
+    participant OTEL
+    participant Sentry
+    participant Platform
+
+    Note over Agent: Agent Startup (bindufy)
+    
+    rect rgb(240, 248, 255)
+        Note over Agent,OTEL: OpenTelemetry Setup
+        Agent->>Agent: Check TELEMETRY_ENABLED
+        Agent->>OTEL: Initialize TracerProvider<br/>(service name, version, env)
+        Agent->>OTEL: Configure OTLP Exporter<br/>(endpoint, headers)
+        Agent->>OTEL: Add BatchSpanProcessor
+        OTEL-->>Agent: Tracer ready
+    end
+
+    rect rgb(255, 248, 240)
+        Note over Agent,Sentry: Sentry Setup
+        Agent->>Agent: Check SENTRY_ENABLED
+        Agent->>Sentry: Initialize SDK<br/>(DSN, environment, release)
+        Agent->>Sentry: Add integrations<br/>(Starlette, SQLAlchemy, Redis)
+        Sentry-->>Agent: Error tracking ready
+    end
+
+    Note over Agent: Agent Running
+
+    rect rgb(240, 255, 240)
+        Note over Agent,Platform: Runtime Telemetry
+        Agent->>OTEL: Create spans (traces)
+        OTEL->>Platform: Export to Langfuse/Arize<br/>(batched, async)
+        Agent->>Sentry: Capture errors/performance
+        Sentry->>Platform: Send to Sentry.io
+    end
+```
+
 
 ## OpenTelemetry Setup
 

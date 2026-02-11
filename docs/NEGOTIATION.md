@@ -2,6 +2,8 @@
 
 Capability-based agent selection for intelligent orchestration. Bindu's negotiation system enables orchestrators to query multiple agents and select the best one for a task based on skills, performance, load, and cost.
 
+The orchestrator code is out of scope for this project. We have just implenented the client side of it.
+
 ## How It Works
 
 ```mermaid
